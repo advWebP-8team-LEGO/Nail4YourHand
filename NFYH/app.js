@@ -10,8 +10,9 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('views', path.join(__dirname, 'views')); 
+app.engine('html', require('ejs').renderFile); // html을 사용하기 위한 처리
+app.set('view engine', 'html'); // html을 사용하기 위한 처리
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -29,13 +30,13 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  // send the error page
+  err.status = err.status || 500;
+  res.status(err.status).send(
+    "<title>" + err.status + " ERROR </title>" +
+    "<h1>" + err.status + "</h1>" +
+    "<h1>" + err.message + "</h1>" +
+    "<pre>" + err.stack + "</pre>");
 });
 
 module.exports = app;
