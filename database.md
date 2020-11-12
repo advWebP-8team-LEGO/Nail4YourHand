@@ -5,7 +5,7 @@
 
 ## **Post**
 
-|id(PK)|userId(FK->User.id)|title|content|date|
+|id(PK)|userId(FK->User.id)|likeCnt|content|createdAt|
 |-|-|-|-|-|
 
 ## **Like**
