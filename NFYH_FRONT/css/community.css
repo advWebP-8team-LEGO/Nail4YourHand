@@ -1,0 +1,109 @@
+@font-face {
+    font-family: 'Bazzi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Bazzi';
+}
+
+.navbar{
+  position: fixed;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  box-shadow: 0 0.5px 3px #999;
+  width: 100%;
+  height: 15vh;
+  z-index: 2;
+  -webkit-transition-duration:0.4s;
+  -webkit-transition-timing-function:ease;
+  transition-duration:0.4s;
+  transition-timing-function:ease;
+}
+
+.down {
+  background-color:white;
+  -webkit-transition-duration:0.4s;
+  -webkit-transition-timing-function:ease;
+  transition-duration:0.4s;
+  transition-timing-function:ease;
+}
+
+.navbar img{
+  position: absolute;
+  left: 10%;
+  width: 110px;
+}
+
+.nav{
+  position: absolute;
+  display: flex;
+  justify-content: right;
+  list-style: none;
+  left: 20%;
+}
+
+.nav a{
+  margin: 20px;
+  color: #888;
+  text-decoration: none;
+  font-size: 30px;
+}
+
+#loc{
+  color: #F05173;
+}
+
+.mem{
+  position: absolute;
+  display: flex;
+  justify-content: right;
+  list-style: none;
+  right: 10%;
+}
+
+
+#login{
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  width: 70px;
+  text-align: center;
+  background-color: white;
+  color: #F05173;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 22px;
+}
+
+#login:hover{
+  border: 3px solid #bbb;
+}
+
+#join{
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  width: 70px;
+  text-align: center;
+  background-color: #F05173;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 22px;
+}
+
+#join:hover{
+  border: 3px solid #bbb;
+}
