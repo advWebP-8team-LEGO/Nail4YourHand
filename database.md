@@ -5,11 +5,11 @@
 
 ## **Post**
 
-|id(PK)|userId(FK->User.id)|likeCnt|content|createdAt|
+|id(PK)|UserId(FK->User.id)|likeCnt|content|createdAt|
 |-|-|-|-|-|
 
 ## **Like**
 
-|userId(FK->User.id)|postId(FK->Post.id)|
+|UserId(FK->User.id)|PostId(FK->Post.id)|
 |-|-|
 
