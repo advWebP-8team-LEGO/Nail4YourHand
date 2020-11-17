@@ -10,6 +10,6 @@
 
 ## **Like**
 
-|id(PK)|userId(FK->User.id)|postId(FK->Post.id)|
-|-|-|-|
+|userId(FK->User.id)|postId(FK->Post.id)|
+|-|-|
 
