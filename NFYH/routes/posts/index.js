@@ -1,14 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const postController = require('../../controller/postController');
+const multer = require('multer');
+const storage = multer.diskStorage({
+  destination: 'public/upload',
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '_' + Math.floor(Math.random() * 10) + '.' + file.originalname.split('.').pop());
+  }
+});
+
+const upload = multer({
+  storage
+});
+
 
 // [POST] localhost:3000/posts
-router.post('/', postController.createPost);
+router.post('/', upload.single('image'), postController.createPost);
 
 // [GET] localhost:3000/posts
 router.get('/', postController.readPosts);
 
 // [POST] localhost:3000/posts/:postId/like
 router.post('/:postId/like', postController.createLike);
+
+router.get('/postTest', function(req, res, next) {
+  res.render('postTest');
+});
+
+router.post('/test', postController.readPosts);
 
 module.exports = router;

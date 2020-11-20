@@ -1,0 +1,10 @@
+img {
+  display: inline-block;
+  width: 30%;
+  height: 35vh;
+  margin: 1em;
+}
+
+h1 {
+  color: blue;
+}
