@@ -6,14 +6,17 @@ module.exports = (sequelize, DataTypes) => {
   unique: true,
   allowNull: false,
   },
+
   name: {
   type: DataTypes.STRING(20),
   allowNull: false,
   },
+
   password: {
   type: DataTypes.STRING(200),
   allowNull: false,
   },
+
   salt: {
   type: DataTypes.STRING(200),
   allowNull: false,
@@ -23,4 +26,5 @@ module.exports = (sequelize, DataTypes) => {
   freezeTableName: true,
   timestamps: false,
   });
+
  };
