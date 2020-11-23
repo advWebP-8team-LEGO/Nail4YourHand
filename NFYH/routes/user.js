@@ -5,8 +5,9 @@ const crypto = require('crypto');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.render('sample');
+  res.render('user/sample');
 });
+
 router.get('/sign_up', function(req, res, next) {
   res.render('user/sign_up')
 })
@@ -26,6 +27,46 @@ router.post('/sign_up', function(req, res, next) {
     })
 
     res.redirect("/");
+})
+
+router.get('/login', function(req, res, next) {
+  let session = req.session;
+
+  res.render("user/login", {
+      session : session
+  });
+});
+
+router.post("/login", async function(req,res,next){
+  let body = req.body;
+
+  let result = await models.User.findOne({
+      where: {
+          email : body.userEmail
+      }
+  });
+
+  let dbPassword = result.dataValues.password;
+  let inputPassword = body.password;
+  let salt = result.dataValues.salt;
+  let hashPassword = crypto.createHash("sha512").update(inputPassword + salt).digest("hex");
+
+  if(dbPassword === hashPassword){
+      console.log("비밀번호 일치");
+      req.session.email = body.userEmail;
+      res.redirect("/user/login");
+  }
+  else{
+      console.log("비밀번호 불일치");
+      res.redirect("/user/login");
+  }
+});
+
+router.get("/logout", function(req,res,next){
+  req.session.destroy();
+  res.clearCookie('sid');
+
+  res.redirect("/user/login")
 })
 
 module.exports = router;
