@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
   <link rel="stylesheet" href="/css/community.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
-
 <body>
   <div class="navbar">
     <img src="/image/logo.png" alt="logo">
@@ -58,17 +56,28 @@
         },
         dataType: "json",
         success: function (result) {
-          console.log("standardOfSort: " + standardOfSort);
           container.innerHTML = "";
-          for (let data of result.data) {
-            container.innerHTML +=
+          for (let post of result.data.posts) {
+            if(result.data.currentUserId === post.UserId) {
+              container.innerHTML +=
               `
               <div class="post_img">
-                <img src="/upload/${data.contents.split("\\").pop()}" width="500px" height="300px">
-                  <button class="delete_btn" onclick="clickLike(event)">🤍</button>
+                <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                  <button class="delete_btn">❌</button>
+                  <button class="like_btn" onclick="clickLike(event)">🤍</button>
                 </img>
               </div>
+              `;
+            } else {
+              container.innerHTML +=
               `
+              <div class="post_img">
+                <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                  <button class="like_btn" onclick="clickLike(event)">🤍</button>
+                </img>
+              </div>
+              `;
+            }      
           }
         },
         error: function (error) {
@@ -87,15 +96,6 @@
       loadPosts("like");
     };
 
-    // const clickSort = (event) => {
-    //   if(event.target.innerHTML === "최신순") {
-    //     dateBtn.setAttribute("border-bottom", "2px solid #aaa");
-    //     likeBtn.setAttribute("border-bottom", "0");
-    //   } else {
-    //     likeBtn.setAttribute("border-bottom", "2px solid #aaa");
-    //     dateBtn.setAttribute("border-bottom", "0");
-    //   }
-    // }
     dateBtn.addEventListener("click", (event) => {
       console.log(event.target.innerHTML);
       if (event.target.innerHTML === "최신순") {
@@ -106,6 +106,7 @@
         $("#date_btn").css("border-bottom", "0");
       }
     });
+    
     likeBtn.addEventListener("click", (event) => {
       console.log(event.target.innerHTML);
       if (event.target.innerHTML === "최신순") {

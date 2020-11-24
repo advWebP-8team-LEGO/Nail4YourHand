@@ -56,6 +56,8 @@ module.exports = {
       standardOfSort
     } = req.query;
 
+    const userId = 1; // 세션에서 userId 가져왔다고 가정
+
     try {
       const posts = await Post.findAll({
         include: [{ // join -> 관계가 있는 테이블들끼리 합쳐주는 것!
@@ -72,9 +74,12 @@ module.exports = {
         sortedPosts = postService.sortLike(posts);
       }
 
-      console.log(sortedPosts);
+      const resultData = {
+        "posts": sortedPosts,
+        "currentUserId": userId
+      }
 
-      return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.READ_POST_ALL_SUCCESS, sortedPosts));
+      return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.READ_POST_ALL_SUCCESS, resultData));
     } catch (err) {
       console.error(err);
       return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.READ_POST_ALL_FAIL));
