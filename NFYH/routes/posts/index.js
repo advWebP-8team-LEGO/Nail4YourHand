@@ -18,15 +18,13 @@ const upload = multer({
 router.post('/', upload.single('image'), postController.createPost);
 
 // [GET] localhost:3000/posts
-router.get('/', postController.readPosts);
+router.get('/board', postController.readPosts);
 
 // [POST] localhost:3000/posts/:postId/like
 router.post('/:postId/like', postController.createLike);
 
-router.get('/postTest', function(req, res, next) {
-  res.render('postTest');
+router.get('/', function(req, res, next) {
+  res.render('community');
 });
-
-router.post('/test', postController.readPosts);
 
 module.exports = router;

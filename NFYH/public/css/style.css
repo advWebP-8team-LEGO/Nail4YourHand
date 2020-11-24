@@ -1,10 +1,38 @@
-img {
+.post_img {
+  position: relative;
   display: inline-block;
   width: 30%;
-  height: 35vh;
   margin: 1em;
+  height: 35vh;
+}
+
+.post_img img {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.post_img button {
+  position: absolute;
+  font-size: 25px;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  border-radius: 100%;
 }
 
 h1 {
   color: blue;
+}
+
+.post .btn_label {
+  font-size: 100px;
+  color: red;
+  opacity: 0.5;
+  position: fixed;
+  z-index: 10;
+  right: 20px;
+  bottom: 10px;
 }

@@ -3,7 +3,9 @@ const {
   Post,
   Like
 } = require('../models');
-const { postService } = require('../service');
+const {
+  postService
+} = require('../service');
 const util = require('../modules/util');
 const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
@@ -41,7 +43,7 @@ module.exports = {
 
       await user.addPost(post); // post에 해당 user에 대한 외래키 추가
 
-      return res.redirect('/posts/postTest');
+      return res.redirect('/posts');
     } catch (err) {
       console.error(err);
       return res
@@ -50,6 +52,10 @@ module.exports = {
     }
   },
   readPosts: async (req, res) => {
+    const {
+      standardOfSort
+    } = req.query;
+
     try {
       const posts = await Post.findAll({
         include: [{ // join -> 관계가 있는 테이블들끼리 합쳐주는 것!
@@ -58,9 +64,17 @@ module.exports = {
         }]
       });
 
-      // const dateSortPosts = postService.sortDate(posts);
-      const likeSortPosts = postService.sortLike(posts);
-      return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.READ_POST_ALL_SUCCESS, likeSortPosts));
+      let sortedPosts;
+
+      if (standardOfSort === "date") {
+        sortedPosts = postService.sortDate(posts);
+      } else {
+        sortedPosts = postService.sortLike(posts);
+      }
+
+      console.log(sortedPosts);
+
+      return res.status(statusCode.OK).send(util.success(statusCode.OK, responseMessage.READ_POST_ALL_SUCCESS, sortedPosts));
     } catch (err) {
       console.error(err);
       return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.READ_POST_ALL_FAIL));
@@ -83,12 +97,4 @@ module.exports = {
       return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.CREATE_LIKE_FAIL));
     }
   },
-  // showPosts: async (req, res) => {
-  //   try {
-
-  //   } catch(err) {
-  //     console.error(err);
-  //     return res.status(statusCode.INTERNAL_SERVER_ERROR).send(util.fail(statusCode.INTERNAL_SERVER_ERROR, responseMessage.READ_POST_ALL_FAIL));
-  //   }
-  // },
 }
