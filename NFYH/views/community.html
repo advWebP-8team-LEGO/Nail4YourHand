@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
   <link rel="stylesheet" href="/css/community.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
+
 <body>
   <div class="navbar">
     <img src="/image/logo.png" alt="logo">
@@ -23,7 +25,7 @@
   </div>
   <div class="area">
     <div class="post">
-      <label class="btn_label" for="pictureBtn">+</label>
+      <label class="btn_label" for="pictureBtn"></label>
       <form style="display: none;" id="img_form" method="post" action="/posts" encType="multipart/form-data">
         <input id="pictureBtn" name="image" type="file" onChange="document.getElementById('img_form').submit();" />
       </form>
@@ -38,13 +40,66 @@
     const container = document.getElementById("container");
     const dateBtn = document.getElementById("date_btn");
     const likeBtn = document.getElementById("like_btn");
+    let standardOfSort = "date";
 
-    const clickLike = (e) => {
+    const clickLike = async (e) => {
+      const postId = e.target.id;
+
       if (e.target.innerHTML === "🤍") {
+        console.log("postId: " + postId);
+        await $.ajax({
+          type: "POST",
+          url: `/posts/${postId}/like`,
+          data: {},
+          dataType: "json",
+          success: function (result) {
+            console.log("ajax success[CREATE LIKE]");
+          },
+          error: function (error) {
+            console.log("ajax error[CREATE LIKE]");
+          }
+        });
+
+        loadPosts(standardOfSort);
+
         e.target.innerHTML = "💖";
       } else {
+        await $.ajax({
+          type: "DELETE",
+          url: `/posts/${postId}/like`,
+          data: {},
+          dataType: "json",
+          success: function (result) {
+            console.log("ajax success[DELETE LIKE]");
+          },
+          error: function (error) {
+            console.log("ajax error[DELETE LIKE]");
+          }
+        });
+
+        loadPosts(standardOfSort);
+
         e.target.innerHTML = "🤍";
       }
+    }
+
+    const clickDelete = async (e) => {
+      const postId = e.target.id;
+
+      await $.ajax({
+        type: "DELETE",
+        url: `/posts/${postId}`,
+        data: {},
+        dataType: "json",
+        success: function (result) {
+          console.log("ajax success[DELETE POST]");
+        },
+        error: function (error) {
+          console.log("ajax error[DELETE POST]");
+        }
+      });
+
+      loadPosts(standardOfSort);
     }
 
     const loadPosts = (standardOfSort) => {
@@ -58,42 +113,84 @@
         success: function (result) {
           container.innerHTML = "";
           for (let post of result.data.posts) {
-            if(result.data.currentUserId === post.UserId) {
-              container.innerHTML +=
-              `
-              <div class="post_img">
-                <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
-                  <button class="delete_btn">❌</button>
-                  <button class="like_btn" onclick="clickLike(event)">🤍</button>
-                </img>
-              </div>
-              `;
+            if (result.data.currentUserId === post.UserId) {
+              if(result.data.likedArr.includes(post.id)) {
+                container.innerHTML +=
+                `
+                <div class="post_img">
+                  <div class="img_header">
+                    <button id="${post.id}" class="header_btn" style="margin-right: 10px !important;" onclick="clickDelete(event)">❌</button>
+                    <div class="like_cnt">
+                      ${post.likeCnt}
+                    </div>
+                    <button id="${post.id}" class="header_btn" onclick="clickLike(event)">💖</button>            
+                  </div>
+                  <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                </div>
+                `;
+              } else {
+                container.innerHTML +=
+                `
+                <div class="post_img">
+                  <div class="img_header">
+                    <button id="${post.id}" class="header_btn" style="margin-right: 10px !important;" onclick="clickDelete(event)">❌</button>
+                    <div class="like_cnt">
+                      ${post.likeCnt}
+                    </div>
+                    <button id="${post.id}" class="header_btn" onclick="clickLike(event)">🤍</button>            
+                  </div>
+                  <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                </div>
+                `;
+              }
+              // post.Liker
             } else {
-              container.innerHTML +=
-              `
-              <div class="post_img">
-                <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
-                  <button class="like_btn" onclick="clickLike(event)">🤍</button>
-                </img>
-              </div>
-              `;
-            }      
+              if(result.data.likedArr.includes(post.id)) {
+                container.innerHTML +=
+                `
+                <div class="post_img">
+                  <div class ="img_header">
+                    <div id="${post.id}" class="like_cnt" style="margin-right: 10px !important;">
+                      ${post.likeCnt}
+                    </div>  
+                    <button id="${post.id}" class="header_btn" onclick="clickLike(event)">💖</button>
+                  </div>
+                  <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                </div>
+                `;
+              } else {
+                container.innerHTML +=
+                `
+                <div class="post_img">
+                  <div class ="img_header">
+                    <div id="${post.id}" class="like_cnt" style="margin-right: 10px !important;">
+                      ${post.likeCnt}
+                    </div>  
+                    <button id="${post.id}" class="header_btn" onclick="clickLike(event)">🤍</button>
+                  </div>
+                  <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                </div>
+                `;
+              }
+            }
           }
         },
         error: function (error) {
-          alert("ajax error");
+          console.log("ajax error[Load Posts]");
         }
       });
     };
 
-    loadPosts("date");
+    loadPosts(standardOfSort);
 
     dateBtn.onclick = () => {
       loadPosts("date");
+      standardOfSort = "date";
     };
 
     likeBtn.onclick = () => {
       loadPosts("like");
+      standardOfSort = "like";
     };
 
     dateBtn.addEventListener("click", (event) => {
@@ -101,18 +198,18 @@
       if (event.target.innerHTML === "최신순") {
         $("#date_btn").css("border-bottom", "2px solid #aaa");
         $("#like_btn").css("border-bottom", "0");
-      } else if(event.target.innerHTML === "좋아요순") {
+      } else if (event.target.innerHTML === "좋아요순") {
         $("#like_btn").css("border-bottom", "2px solid #aaa");
         $("#date_btn").css("border-bottom", "0");
       }
     });
-    
+
     likeBtn.addEventListener("click", (event) => {
       console.log(event.target.innerHTML);
       if (event.target.innerHTML === "최신순") {
         $("#date_btn").css("border-bottom", "2px solid #aaa");
         $("#like_btn").css("border-bottom", "0");
-      } else if(event.target.innerHTML === "좋아요순") {
+      } else if (event.target.innerHTML === "좋아요순") {
         $("#like_btn").css("border-bottom", "2px solid #aaa");
         $("#date_btn").css("border-bottom", "0");
       }

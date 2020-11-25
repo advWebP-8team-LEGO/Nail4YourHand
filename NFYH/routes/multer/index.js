@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 var storage = multer.diskStorage({
-  destination: 'upload/',
+  destination: '/upload',
   filename: function (req, file, cb) {
     cb(null, Date.now() + '_' + Math.floor(Math.random() * 10) + '.' + file.originalname.split('.').pop());
   }
