@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-router.use('/users', require('./users'));
-router.use('/posts', require('./posts'));
+router.use('/user', require('./user'));
+router.use('/posts', require('./post'));
 router.use('/multer', require('./multer'));
 
 /* GET home page. */

@@ -27,7 +27,7 @@ router.post('/', upload.single('image'), postController.createPost);
 // [DELETE] localhost:3000/posts/user-email
 router.delete('/:id', postController.deletePost);
 
-// [POST] localhost:3000/posts/:postId/like
+// [POST] localhost:3000/post/:postId/like
 router.post('/:postId/like', postController.createLike);
 
 // [POST] localhost:3000/posts/:postId/like

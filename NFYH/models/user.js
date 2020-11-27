@@ -3,17 +3,20 @@ module.exports = (sequelize, DataTypes) => {
   //모델의 Attributes (Column)을 정의하는곳
   email: {
   type: DataTypes.STRING(30),
-  unique: true,
+  //unique: true,
   allowNull: false,
   },
+
   name: {
   type: DataTypes.STRING(20),
   allowNull: false,
   },
+
   password: {
   type: DataTypes.STRING(200),
   allowNull: false,
   },
+
   salt: {
   type: DataTypes.STRING(200),
   allowNull: false,
@@ -23,4 +26,5 @@ module.exports = (sequelize, DataTypes) => {
   freezeTableName: true,
   timestamps: false,
   });
+
  };
