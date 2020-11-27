@@ -1,0 +1,71 @@
+.post_img {
+  position: relative;
+  display: inline-block;
+  width: 30%;
+  margin: 1em;
+  height: 35vh;
+  box-shadow: 5px 4px 6px rgba(50, 50, 93, 0.11), 0 3px 3px rgba(0, 0, 0, 0.1); 
+}
+
+.post_img:hover {
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.post_img img {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.post_img .img_header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 20px;
+}
+
+.img_header button.header_btn {
+  float: right;
+  height: 100%;
+  font-size: 25px;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+}
+
+button.header_btn:hover {
+  cursor: pointer;
+}
+
+.img_header div.like_cnt {
+  float: right;
+  height: 100%;
+  font-size: 25px;
+  font-weight: bold;
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  padding-top: 4px;
+  border: 0;
+  outline: 0;
+}
+
+h1 {
+  color: blue;
+}
+
+.post .btn_label {
+  cursor: pointer;
+  display: block;
+  background: url('../image/plus.png');
+  background-size: contain;
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  z-index: 10;
+  right: 20px;
+  bottom: 10px;
+}

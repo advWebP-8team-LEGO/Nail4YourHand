@@ -1,4 +1,4 @@
-module.exports = { // 필요한거 추가 및 삭제해서 사용하면 될 듯
+module.exports = {
   NULL_VALUE: "필요한 값이 없습니다.",
   OUT_OF_VALUE: "파라미터 값이 잘못 되었습니다.",
 
@@ -8,11 +8,6 @@ module.exports = { // 필요한거 추가 및 삭제해서 사용하면 될 듯
   MEMBER_READ_ALL_SUCCESS: "전체 회원 조회성공",
   MEMBER_UPDATE_SUCCESS: "회원 수정 성공",
   MEMBER_DELETE_SUCCESS: "회원 삭제 성공",
-  MEMBER_CREATE_FAIL: "회원 생성 실패",
-  MEMBER_READ_FAIL: "회원 조회 실패",
-  MEMBER_READ_ALL_FAIL: "전체 회원 조회실패",
-  MEMBER_UPDATE_FAIL: "회원 수정 실패",
-  MEMBER_DELETE_FAIL: "회원 삭제 실패",
 
   /* 회원가입 */
   SIGN_UP_SUCCESS: "회원가입성공",
@@ -23,6 +18,37 @@ module.exports = { // 필요한거 추가 및 삭제해서 사용하면 될 듯
   NO_USER: "존재하지않는 유저 id 입니다.",
   MISS_MATCH_PW: "비밀번호가일치하지않습니다",
 
+  /* User */
+  READ_USER_SUCCESS: "사용자 조회 성공",
+  READ_USER_ALL_SUCCESS: "전체 사용자 조회 실패",
+  READ_USER_FAIL: "사용자 조회 성공",
+  READ_USER_ALL_FAIL: "전체 사용자 조회 실패",
+  UPDATE_USER_SUCCESS: "사용자 업데이트 성공",
+  UPDATE_USER_FAIL: "사용자 업데이트 실패",
+  DELETE_USER_SUCCESS: "사용자 삭제 성공",
+  DELETE_USER_FAIL: "사용자 삭제 실패",
+
+  /* Post */
+  CREATE_POST_SUCCESS: "게시글 생성 완료",
+  CREATE_POST_FAIL: "게시글 생성 실패",
+  READ_POST_FAIL: "게시글 조회 실패",
+  READ_POST_ALL_FAIL: "전체 게시글 조회 실패",
+  READ_POST_SUCCESS: "게시글 조회 성공",
+  READ_POST_ALL_SUCCESS: "전체 게시글 조회 성공",
+  UPDATE_POST_SUCCESS: "게시글 업데이트 성공",
+  UPDATE_POST_FAIL: "게시글 업데이트 실패",
+  DELETE_POST_SUCCESS: "게시글 삭제 성공",
+  DELETE_POST_FAIL: "게시글 삭제 실패",
+  NO_POST: "존재하지않는 게시글 입니다.",
+
+  /** Like */
+  CREATE_LIKE_SUCCESS: "게시글 좋아요 성공",
+  CREATE_LIKE_FAIL: "게시글 좋아요 실패",
+  DELETE_LIKE_SUCCESS: "게시글 좋아요 취소하기 성공",
+  DELETE_LIKE_FAIL: "게시글 좋아요 취소하기 실패",
+  ALREADY_LIKED: '이미 좋아요가 되어 있음',
+  NO_Like: "존재하지않는 좋아요 입니다.",
+
   /* 서버에러 */
   INTERNAL_SERVER_ERROR: "서버 내부 오류",
-};
+}
