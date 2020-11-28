@@ -1,8 +1,6 @@
 @font-face {
-    font-family: 'Bazzi';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  src: url('../fonts/Bazzi OTF.otf');
+  font-family: 'Bazzi';
 }
 
 html{
@@ -76,15 +74,15 @@ body {
   padding: 10px;
   width: 70px;
   text-align: center;
-  background-color: white;
-  color: #F05173;
+  background-color: #F05173;
+  color: white;
   text-decoration: none;
   border-radius: 5px;
   font-size: 22px;
 }
 
 #login:hover{
-  border: 3px solid #bbb;
+  cursor: pointer;
 }
 
 #join{
@@ -93,7 +91,7 @@ body {
   padding: 10px;
   width: 70px;
   text-align: center;
-  background-color: #F05173;
+  background-color: grey;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -101,5 +99,5 @@ body {
 }
 
 #join:hover{
-  border: 3px solid #bbb;
+  cursor: pointer;
 }

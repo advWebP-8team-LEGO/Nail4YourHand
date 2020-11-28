@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
   <script src="../js/login.js" type="text/javascript"></script>
   <title>Document</title>
 </head>
+
 <body>
   <div class="navbar">
     <img src="../images/logo.png" alt="logo">
@@ -22,6 +24,21 @@
       <li><a id="join" href="join.html">회원가입</a></li>
     </ul>
   </div>
-  login
+  <div class="area">
+    <div class="loginbox">
+      <h1>NFYH</h1>
+      <form action="#">
+        <input type="email" id="loginid" placeholder="이메일"><br>
+        <input type="password" id="loginpw" placeholder="패스워드">
+        <div class="btnwrap">
+          <input type="submit" class="btn" id="loginbtn" value="로그인">
+          <input type="button" class="btn" id="joinbtn" value="회원가입" onclick="location.href='join.html'"><br>
+          <input type="submit" class="btn" id="logingoogle" value="구글로 로그인"><br>
+          <input type="submit" class="btn" id="loginkakao" value="카카오로 로그인"><br>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
+
 </html>
