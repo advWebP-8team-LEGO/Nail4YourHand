@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const postController = require('../../controller/postController');
+const postController = require('../controller/postController');
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: 'public/upload',
@@ -15,7 +15,9 @@ const upload = multer({
 
 // [GET] localhost:3000/posts
 router.get('/', function(req, res, next) {
-  res.render('community');
+  res.render('community', {
+    session: req.session
+  });
 });
 
 // [GET] localhost:3000/posts/board

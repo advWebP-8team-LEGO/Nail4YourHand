@@ -9,18 +9,25 @@
   <link rel="stylesheet" href="/css/community.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
-
 <body>
   <div class="navbar">
-    <img src="/image/logo.png" alt="logo">
+    <img src="/images/logo.png" alt="logo">
     <ul class="nav">
       <li><a href="/">홈</a></li>
-      <li><a href="/users">만들기</a></li>
+      <li><a href="/nail">만들기</a></li>
       <li><a id="loc" href="/posts">커뮤니티</a></li>
     </ul>
     <ul class="mem">
-      <li><a id="login" href="login.html">로그인</a></li>
-      <li><a id="join" href="join.html">회원가입</a></li>
+      <% if(session.userId){ %>
+      <li class="email"><%= session.userEmail %></li>
+      <li class="name"><%= session.userName %></li>
+      <form action="/user/logout" method="get">
+        <input id="logout" type="submit" value="로그아웃">
+      </form>
+      <% } else{ %>
+      <li><a id="login" href="/user/login">로그인</a></li>
+      <li><a id="join" href="/user/sign_up">회원가입</a></li>
+      <% } %>
     </ul>
   </div>
   <div class="area">
