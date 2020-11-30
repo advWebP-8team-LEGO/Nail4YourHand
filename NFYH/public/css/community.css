@@ -80,15 +80,15 @@ body {
   padding: 10px;
   width: 70px;
   text-align: center;
-  background-color: white;
-  color: #F05173;
+  background-color: #F05173;
+  color: white;
   text-decoration: none;
   border-radius: 5px;
   font-size: 22px;
 }
 
 #login:hover{
-  border: 3px solid #bbb;
+  cursor: pointer;
 }
 
 #join{
@@ -97,7 +97,7 @@ body {
   padding: 10px;
   width: 70px;
   text-align: center;
-  background-color: #F05173;
+  background-color: grey;
   color: white;
   text-decoration: none;
   border-radius: 5px;
@@ -105,7 +105,7 @@ body {
 }
 
 #join:hover{
-  border: 3px solid #bbb;
+  cursor: pointer;
 }
 
 .area {
