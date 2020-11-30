@@ -6,7 +6,7 @@ var logger = require('morgan');
 const { sequelize } = require('./models');
 const session = require('express-session');
 
-sequelize.sync({ })
+sequelize.sync({alter: true})
 .then(() => {
  console.log('데이터베이스 연결 성공.');
 }).catch((error) => {
@@ -15,8 +15,8 @@ sequelize.sync({ })
 
 // --------------Router----------------------
 var indexRouter = require('./routes/index');
-var userRouter = require('./routes/user');
-var postRouter = require('./routes/post');
+// var userRouter = require('./routes/user');
+// var postRouter = require('./routes/post');
 
 var app = express();
 
@@ -41,8 +41,8 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
-app.use('/user', userRouter);
-app.use('/post', postRouter);
+// app.use('/user', userRouter);
+// app.use('/post', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

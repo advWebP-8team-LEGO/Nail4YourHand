@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   //모델의 Attributes (Column)을 정의하는곳
   email: {
   type: DataTypes.STRING(30),
-  //unique: true,
+  unique: true,
   allowNull: false,
   },
 

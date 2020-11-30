@@ -7,28 +7,39 @@
   <title>Community</title>
   <link rel="stylesheet" href="/css/style.css" />
   <link rel="stylesheet" href="/css/community.css">
+  <link rel="stylesheet" href="/css/modal.css">
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 
 <body>
   <div class="navbar">
-    <img src="/image/logo.png" alt="logo">
+    <img src="/images/logo.png" alt="logo">
     <ul class="nav">
       <li><a href="/">홈</a></li>
-      <li><a href="/users">만들기</a></li>
+      <li><a href="/nail">만들기</a></li>
       <li><a id="loc" href="/posts">커뮤니티</a></li>
     </ul>
     <ul class="mem">
-      <li><a id="login" href="login.html">로그인</a></li>
-      <li><a id="join" href="join.html">회원가입</a></li>
+      <% if(session.userId){ %>
+      <li class="email"><%= session.userEmail %></li>
+      <li class="name"><%= session.userName %></li>
+      <form action="/user/logout" method="get">
+        <input id="logout" type="submit" value="로그아웃">
+      </form>
+      <% } else{ %>
+      <li><a id="login" href="/user/login">로그인</a></li>
+      <li><a id="join" href="/user/sign_up">회원가입</a></li>
+      <% } %>
     </ul>
   </div>
   <div class="area">
     <div class="post">
+      <% if(session.userId){ %>
       <label class="btn_label" for="pictureBtn"></label>
       <form style="display: none;" id="img_form" method="post" action="/posts" encType="multipart/form-data">
         <input id="pictureBtn" name="image" type="file" onChange="document.getElementById('img_form').submit();" />
       </form>
+      <% } %>
       <div class="btnWrap">
         <button id="date_btn">최신순</button>
         <button id="like_btn">좋아요순</button>
@@ -36,11 +47,42 @@
       <div id="container"></div>
     </div>
   </div>
+  <div class="modal hidden">
+    <div class="modal_overlay">
+    </div>
+    <div class="withdraw_check">
+      <header class="modal_header">
+        <span class="close">X</span>
+      </header>
+      <img id="img" src="/upload/1606552479928_6.jpg" alt="이미지">
+    </div>
+  </div>
   <script>
     const container = document.getElementById("container");
     const dateBtn = document.getElementById("date_btn");
     const likeBtn = document.getElementById("like_btn");
     let standardOfSort = "date";
+    const openBtns = document.querySelectorAll(".open");
+    const modal = document.querySelector(".modal");
+    const overlay = modal.querySelector(".modal_overlay");
+    const closeBtn = modal.querySelector(".close");
+
+    const openModal = (event) => {
+      const img = document.getElementById("img");
+      modal.classList.remove("hidden");
+      img.src = event.target.src;
+    }
+
+    const closeModal = () => {
+      modal.classList.add("hidden");
+    }
+
+    overlay.addEventListener("click", closeModal);
+    closeBtn.addEventListener("click", closeModal);
+
+    for (const btn of openBtns) {
+      btn.addEventListener("click", openModal);
+    }
 
     const clickLike = async (e) => {
       const postId = e.target.id;
@@ -114,9 +156,9 @@
           container.innerHTML = "";
           for (let post of result.data.posts) {
             if (result.data.currentUserId === post.UserId) {
-              if(result.data.likedArr.includes(post.id)) {
+              if (result.data.likedArr.includes(post.id)) {
                 container.innerHTML +=
-                `
+                  `
                 <div class="post_img">
                   <div class="img_header">
                     <button id="${post.id}" class="header_btn" style="margin-right: 10px !important;" onclick="clickDelete(event)">❌</button>
@@ -125,12 +167,12 @@
                     </div>
                     <button id="${post.id}" class="header_btn" onclick="clickLike(event)">💖</button>            
                   </div>
-                  <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                  <img class="open" onclick="openModal(event)" src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
                 </div>
                 `;
               } else {
                 container.innerHTML +=
-                `
+                  `
                 <div class="post_img">
                   <div class="img_header">
                     <button id="${post.id}" class="header_btn" style="margin-right: 10px !important;" onclick="clickDelete(event)">❌</button>
@@ -139,15 +181,14 @@
                     </div>
                     <button id="${post.id}" class="header_btn" onclick="clickLike(event)">🤍</button>            
                   </div>
-                  <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                  <img class="open" onclick="openModal(event)" src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
                 </div>
                 `;
               }
-              // post.Liker
             } else {
-              if(result.data.likedArr.includes(post.id)) {
+              if (result.data.likedArr.includes(post.id)) {
                 container.innerHTML +=
-                `
+                  `
                 <div class="post_img">
                   <div class ="img_header">
                     <div id="${post.id}" class="like_cnt" style="margin-right: 10px !important;">
@@ -155,12 +196,12 @@
                     </div>  
                     <button id="${post.id}" class="header_btn" onclick="clickLike(event)">💖</button>
                   </div>
-                  <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                  <img class="open" onclick="openModal(event)" src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
                 </div>
                 `;
               } else {
                 container.innerHTML +=
-                `
+                  `
                 <div class="post_img">
                   <div class ="img_header">
                     <div id="${post.id}" class="like_cnt" style="margin-right: 10px !important;">
@@ -168,7 +209,7 @@
                     </div>  
                     <button id="${post.id}" class="header_btn" onclick="clickLike(event)">🤍</button>
                   </div>
-                  <img src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
+                  <img class="open" onclick="openModal(event)" src="/upload/${post.contents.split("\\").pop()}" width="500px" height="300px">
                 </div>
                 `;
               }

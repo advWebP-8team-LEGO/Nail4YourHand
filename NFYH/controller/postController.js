@@ -17,7 +17,7 @@ module.exports = {
       standardOfSort
     } = req.query;
 
-    const userId = 1; // 세션에서 userId 가져왔다고 가정
+    const userId = req.session.userId; // 세션에서 userId 가져왔다고 가정
 
     try {
       const posts = await Post.findAll({
@@ -62,7 +62,7 @@ module.exports = {
     }
   },
   createPost: async (req, res) => {
-    const userId = 1; // 세션 대체
+    const userId = req.session.userId; // 세션 대체
 
     if (!userId) {
       console.log("필요한 값이 없습니다.");
@@ -117,6 +117,9 @@ module.exports = {
         }
       });
       fs.unlink(deletedPost.contents, function (err) {
+        if(err) {
+          console.error(err);
+        }
         console.log('delete Post [' + deletedPost.id + ']');
       });
 
@@ -129,7 +132,8 @@ module.exports = {
   createLike: async (req, res) => {
     const PostId = req.params.postId;
     console.log("PostId: " + PostId);
-    const UserId = 1; // 세션에서 받아온다고 가정
+    console.log("UserId: " + req.session.userId)
+    const UserId = req.session.userId;
 
     if (!PostId || !UserId) {
       console.log('필요한 값이 없습니다!');
@@ -174,7 +178,7 @@ module.exports = {
   deleteLike: async (req, res) => {
     const PostId = req.params.postId;
     console.log("PostId: " + PostId);
-    const UserId = 1; // 세션에서 받아온다고 가정
+    const UserId = req.session.userId;
 
     if (!PostId || !UserId) {
       console.log('필요한 값이 없습니다!');

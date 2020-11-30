@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Bazzi';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .post_img {
   position: relative;
   display: inline-block;
@@ -60,7 +67,7 @@ h1 {
 .post .btn_label {
   cursor: pointer;
   display: block;
-  background: url('../image/plus.png');
+  background: url('../images/plus.png');
   background-size: contain;
   position: fixed;
   width: 80px;
@@ -68,4 +75,33 @@ h1 {
   z-index: 10;
   right: 20px;
   bottom: 10px;
+}
+
+.mem .email {
+  border: 5px solid rgb(255, 195, 195);
+  border-right: 0;
+  padding: 7px;
+}
+
+.mem .name {
+  border: 5px solid rgb(255, 195, 195);
+  padding: 7px;
+}
+
+#logout{
+  display: inline-block;
+  font-family: 'Bazzi';
+  border: 0;
+  width: 120px;
+  margin-left: 30px;
+  margin-top: 3px;
+  text-align: center;
+  background-color: white;
+  color: #F05173;
+  font-size: 25px;
+}
+
+#logout:hover{
+  border-radius: 5px;
+  border: 3px solid #bbb;
 }
