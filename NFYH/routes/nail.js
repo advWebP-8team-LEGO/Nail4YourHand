@@ -3,7 +3,7 @@ const router = express.Router();
 
 // [GET]localhost:3000/nail
 router.get('/', function (req, res, next) {
-  res.render('nail', {
+  res.render('new', {
     session: req.session
   });
 });
