@@ -106,21 +106,99 @@ body {
   cursor: pointer;
 }
 
-#colorPicker {
+#palette {
   position: absolute;
-  top: 200px;
+  top: 150px;
+  left: 100px;
+}
+
+.draw {
+  float: left;
+  text-align: center;
+  margin-right: 40px;
+  position: relative;
+  top: 60px;
+}
+
+#pen {
+  display: block;
+  width: 40px;
+  margin-bottom: 30px;
+}
+
+#eraser {
+  display: block;
+  width: 40px;
+}
+
+table {
+  width: 230px;
+  height: 230px;
+  border: none;
+}
+
+table input {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#red{
+  background-color: red;
+}
+
+#orange{
+  background-color: orange;
+}
+
+#yellow{
+  background-color: yellow;
+}
+
+#yellowgreen{
+  background-color: yellowgreen;
+}
+
+#blue{
+  background-color: blue;
+}
+
+#deeppink{
+  background-color: deeppink;
+}
+
+#purple{
+  background-color: purple;
+}
+
+#beige{
+  background-color: beige;
+}
+
+#black{
+  background-color: black;
+}
+
+#color{
+  display: block;
+  background: none;
+  border: none;
+  width: 230px;
+  height: 50px;
+  margin-left: 78px;
 }
 
 #canvas {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   position: absolute;
   left: 30%;
   top: 20%;
   background-color: white;
-  /* background-image: url('../images/hand.jpg');
+  background-image: url('/images/hand.jpg');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: 220px 0; */
+  background-position: 10px 10px;
 }
 
 .options {
@@ -140,4 +218,13 @@ body {
 
 #saveBtn img{
   width: 70px;
+}
+
+.controls__range {
+  width: 100%;
+  padding-left: 80px;
+}
+
+.controls__range input {
+  width: 73%;
 }
