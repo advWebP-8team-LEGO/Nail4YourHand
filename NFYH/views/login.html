@@ -27,14 +27,14 @@
   <div class="area">
     <div class="loginbox">
       <h1>NFYH</h1>
-      <form action="/user/login" method="post">
+      <form action="/user/login" method='POST'>
         <input type="email" id="loginid" placeholder="이메일" name="userEmail"><br>
         <input type="password" id="loginpw" placeholder="패스워드" name="password">
         <div class="btnwrap">
           <input type="submit" class="btn" id="loginbtn" value="로그인">
           <input type="button" class="btn" id="joinbtn" value="회원가입" onclick="location.href='join.html'"><br>
-          <input type="submit" class="btn" id="logingoogle" value="구글로 로그인"><br>
-          <input type="submit" class="btn" id="loginkakao" value="카카오로 로그인"><br>
+          <a class="btn" id="logingoogle" href="/auth/google">구글로 로그인</a>
+          <a class="btn" id="loginkakao" href="/auth/kakao">카카오톡으로 로그인</a>
         </div>
       </form>
     </div>

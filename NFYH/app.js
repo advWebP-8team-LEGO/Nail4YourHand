@@ -16,15 +16,9 @@ sequelize
   });
 
 // --------------Router----------------------
-<<<<<<< HEAD
 var indexRouter = require('./routes/index');
 // var userRouter = require('./routes/user');
 // var postRouter = require('./routes/post');
-=======
-var indexRouter = require("./routes/index");
-var userRouter = require("./routes/user");
-var postRouter = require("./routes/post");
->>>>>>> Google-Login
 
 var app = express();
 
@@ -51,20 +45,15 @@ app.use(
 );
 
 app.use("/", indexRouter);
-app.use("/user", userRouter);
-app.use("/post", postRouter);
+// app.use("/user", userRouter);
+// app.use("/post", postRouter);
 
-<<<<<<< HEAD
-app.use('/', indexRouter);
-// app.use('/user', userRouter);
-// app.use('/post', postRouter);
-=======
 var passport = require("./lib/passport")(app);
 
 app.get(
   "/auth/google",
   passport.authenticate("google", {
-    scope: ["https://www.googleapis.com/auth/plus.login"],
+    scope: ["https://www.googleapis.com/auth/plus.login", 'email'],
   })
 );
 
@@ -75,7 +64,6 @@ app.get(
     res.redirect("/");
   }
 );
->>>>>>> Google-Login
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -89,18 +77,10 @@ app.use(function (err, req, res, next) {
   res
     .status(err.status)
     .send(
-      "<title>" +
-        err.status +
-        " ERROR </title>" +
-        "<h1>" +
-        err.status +
-        "</h1>" +
-        "<h1>" +
-        err.message +
-        "</h1>" +
-        "<pre>" +
-        err.stack +
-        "</pre>"
+      "<title>" + err.status + " ERROR </title>" +
+      "<h1>" + err.status + "</h1>" +
+      "<h1>" + err.message + "</h1>" +
+      "<pre>" + err.stack + "</pre>"
     );
 });
 

@@ -103,6 +103,12 @@ body {
   cursor: pointer;
 }
 
+@media all and (max-width : 800px) {
+  .mem{
+    display: none;
+  }
+}
+
 .area {
   position: relative;
   display: flex;
@@ -131,10 +137,6 @@ body {
   margin-bottom: 20px;
 }
 
-​.btnwrap {
-  text-align: center;
-}
-
 #joinbtn {
   margin-top: 20px;
   width: 265px;
@@ -161,6 +163,7 @@ body {
 }
 
 #logingoogle, #loginkakao{
+  display: block;
   width: 540px;
   height: 40px;
   background-color: white;
@@ -169,6 +172,9 @@ body {
   color: #666;
   font-size: 20px;
   font-family: 'Bazzi';
+  text-decoration: none;
+  text-align: center;
+  padding-top: 20px;
 }
 
 #logingoogle {
