@@ -10,6 +10,7 @@ const util = require('../modules/util');
 const responseMessage = require('../modules/responseMessage');
 const statusCode = require('../modules/statusCode');
 const fs = require('fs');
+const path = require('path');
 
 module.exports = {
   readPosts: async (req, res) => {
@@ -72,7 +73,10 @@ module.exports = {
     }
 
     try {
-      const image = req.file.path; // 이것으로 파일의 주소를 클라이언트에게 넘겨준다!
+      let image = req.file.path; // 이것으로 파일의 주소를 클라이언트에게 넘겨준다!
+      image = image.replace(path.sep, '/');
+      image = image.replace(path.sep, '/');
+
       console.log(image);
       console.log(req.file);
       console.log(req.body);
