@@ -1,0 +1,1 @@
+# advWebP API Specification
